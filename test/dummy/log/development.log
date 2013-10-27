@@ -1,0 +1,103 @@
+Connecting to database specified by database.yml
+  [1m[36m (1.6ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (0.3ms)[0m  CREATE TABLE "hotels" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "active" boolean) 
+  [1m[36m (0.1ms)[0m  [1mCREATE TABLE "rooms" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "hotel_id" integer) [0m
+  [1m[35m (0.1ms)[0m  CREATE TABLE "hotel_translations" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "hotel_id" integer NOT NULL, "locale" varchar(255) NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (0.1ms)[0m  [1mALTER TABLE "hotel_translations" ADD "name" varchar(255)[0m
+  [1m[35m (0.1ms)[0m  ALTER TABLE "hotel_translations" ADD "description" text
+  [1m[36m (0.1ms)[0m  [1mCREATE INDEX "index_hotel_translations_on_hotel_id" ON "hotel_translations" ("hotel_id")[0m
+  [1m[35m (0.1ms)[0m  CREATE INDEX "index_hotel_translations_on_locale" ON "hotel_translations" ("locale")
+  [1m[36m (0.1ms)[0m  [1mCREATE TABLE "room_translations" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "room_id" integer NOT NULL, "locale" varchar(255) NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.1ms)[0m  ALTER TABLE "room_translations" ADD "title" varchar(255)
+  [1m[36m (0.1ms)[0m  [1mCREATE INDEX "index_room_translations_on_room_id" ON "room_translations" ("room_id")[0m
+  [1m[35m (0.1ms)[0m  CREATE INDEX "index_room_translations_on_locale" ON "room_translations" ("locale")
+  [1m[36mHotel Load (1.2ms)[0m  [1mSELECT "hotels".* FROM "hotels" [0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (5.3ms)[0m  [1mINSERT INTO "hotels" ("active") VALUES (?)[0m  [["active", nil]]
+  [1m[35mHotel::Translation Load (0.1ms)[0m  SELECT "hotel_translations".* FROM "hotel_translations" WHERE "hotel_translations"."hotel_id" = 1 AND "hotel_translations"."locale" = 'en' LIMIT 1
+  [1m[36mSQL (1.7ms)[0m  [1mINSERT INTO "hotel_translations" ("created_at", "description", "hotel_id", "locale", "name", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["created_at", Sat, 26 Oct 2013 12:14:55 UTC +00:00], ["description", "hotel description1"], ["hotel_id", 1], ["locale", "en"], ["name", "hotel name"], ["updated_at", Sat, 26 Oct 2013 12:14:55 UTC +00:00]]
+  [1m[35m (0.1ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mHotel::Translation Load (0.1ms)[0m  SELECT "hotel_translations".* FROM "hotel_translations" WHERE "hotel_translations"."hotel_id" = 1 AND "hotel_translations"."locale" = 'ar' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "hotel_translations" ("created_at", "description", "hotel_id", "locale", "name", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["created_at", Sat, 26 Oct 2013 12:14:55 UTC +00:00], ["description", "ar description "], ["hotel_id", 1], ["locale", "ar"], ["name", "ar hotel name "], ["updated_at", Sat, 26 Oct 2013 12:14:55 UTC +00:00]]
+  [1m[35m (0.0ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "rooms" ("hotel_id") VALUES (?)  [["hotel_id", 1]]
+  [1m[36mRoom::Translation Load (0.1ms)[0m  [1mSELECT "room_translations".* FROM "room_translations" WHERE "room_translations"."room_id" = 1 AND "room_translations"."locale" = 'ar' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "room_translations" ("created_at", "locale", "room_id", "title", "updated_at") VALUES (?, ?, ?, ?, ?)  [["created_at", Sat, 26 Oct 2013 12:14:55 UTC +00:00], ["locale", "ar"], ["room_id", 1], ["title", "room title ar 1"], ["updated_at", Sat, 26 Oct 2013 12:14:55 UTC +00:00]]
+  [1m[36m (0.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "rooms" ("hotel_id") VALUES (?)[0m  [["hotel_id", 1]]
+  [1m[35mRoom::Translation Load (0.1ms)[0m  SELECT "room_translations".* FROM "room_translations" WHERE "room_translations"."room_id" = 2 AND "room_translations"."locale" = 'ar' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "room_translations" ("created_at", "locale", "room_id", "title", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["created_at", Sat, 26 Oct 2013 12:14:55 UTC +00:00], ["locale", "ar"], ["room_id", 2], ["title", "room title ar 2"], ["updated_at", Sat, 26 Oct 2013 12:14:55 UTC +00:00]]
+  [1m[35m (0.0ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "room_translations" ("created_at", "locale", "room_id", "title", "updated_at") VALUES (?, ?, ?, ?, ?)  [["created_at", Sat, 26 Oct 2013 12:14:55 UTC +00:00], ["locale", "en"], ["room_id", 1], ["title", "room title en 1"], ["updated_at", Sat, 26 Oct 2013 12:14:55 UTC +00:00]]
+  [1m[36m (0.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "room_translations" ("created_at", "locale", "room_id", "title", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["created_at", Sat, 26 Oct 2013 12:14:55 UTC +00:00], ["locale", "en"], ["room_id", 2], ["title", "room title en 2"], ["updated_at", Sat, 26 Oct 2013 12:14:55 UTC +00:00]]
+  [1m[35m (0.0ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  UPDATE "hotel_translations" SET "name" = 'new name', "updated_at" = '2013-10-26 12:14:55.893507' WHERE "hotel_translations"."id" = 1
+  [1m[36m (0.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mUPDATE "hotel_translations" SET "name" = 'new name2', "updated_at" = '2013-10-26 12:14:55.898321' WHERE "hotel_translations"."id" = 1[0m
+  [1m[35m (0.0ms)[0m  commit transaction
+  [1m[36mHotel Load (0.1ms)[0m  [1mSELECT "hotels".* FROM "hotels" [0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mHotel::Translation Load (0.1ms)[0m  [1mSELECT "hotel_translations".* FROM "hotel_translations" WHERE "hotel_translations"."hotel_id" = 1[0m
+  [1m[35mSQL (0.1ms)[0m  DELETE FROM "hotel_translations" WHERE "hotel_translations"."id" = ?  [["id", 1]]
+  [1m[36mSQL (0.0ms)[0m  [1mDELETE FROM "hotel_translations" WHERE "hotel_translations"."id" = ?[0m  [["id", 2]]
+  [1m[35mRoom Load (0.1ms)[0m  SELECT "rooms".* FROM "rooms" WHERE "rooms"."hotel_id" = 1
+  [1m[36mRoom::Translation Load (0.1ms)[0m  [1mSELECT "room_translations".* FROM "room_translations" WHERE "room_translations"."room_id" = 1[0m
+  [1m[35mSQL (0.1ms)[0m  DELETE FROM "room_translations" WHERE "room_translations"."id" = ?  [["id", 1]]
+  [1m[36mSQL (0.0ms)[0m  [1mDELETE FROM "room_translations" WHERE "room_translations"."id" = ?[0m  [["id", 3]]
+  [1m[35mSQL (0.1ms)[0m  DELETE FROM "rooms" WHERE "rooms"."id" = ?  [["id", 1]]
+  [1m[36mRoom::Translation Load (0.1ms)[0m  [1mSELECT "room_translations".* FROM "room_translations" WHERE "room_translations"."room_id" = 2[0m
+  [1m[35mSQL (0.0ms)[0m  DELETE FROM "room_translations" WHERE "room_translations"."id" = ?  [["id", 2]]
+  [1m[36mSQL (0.0ms)[0m  [1mDELETE FROM "room_translations" WHERE "room_translations"."id" = ?[0m  [["id", 4]]
+  [1m[35mSQL (0.0ms)[0m  DELETE FROM "rooms" WHERE "rooms"."id" = ?  [["id", 2]]
+  [1m[36mSQL (0.1ms)[0m  [1mDELETE FROM "hotels" WHERE "hotels"."id" = ?[0m  [["id", 1]]
+  [1m[35m (0.0ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "hotels" ("active") VALUES (?)  [["active", nil]]
+  [1m[36mHotel::Translation Load (0.1ms)[0m  [1mSELECT "hotel_translations".* FROM "hotel_translations" WHERE "hotel_translations"."hotel_id" = 2 AND "hotel_translations"."locale" = 'en' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "hotel_translations" ("created_at", "description", "hotel_id", "locale", "name", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["created_at", Sat, 26 Oct 2013 12:14:55 UTC +00:00], ["description", "hotel description1"], ["hotel_id", 2], ["locale", "en"], ["name", "hotel name"], ["updated_at", Sat, 26 Oct 2013 12:14:55 UTC +00:00]]
+  [1m[36m (0.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mHotel::Translation Load (0.1ms)[0m  [1mSELECT "hotel_translations".* FROM "hotel_translations" WHERE "hotel_translations"."hotel_id" = 2 AND "hotel_translations"."locale" = 'ar' LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "hotel_translations" ("created_at", "description", "hotel_id", "locale", "name", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["created_at", Sat, 26 Oct 2013 12:14:55 UTC +00:00], ["description", "ar description "], ["hotel_id", 2], ["locale", "ar"], ["name", "ar hotel name "], ["updated_at", Sat, 26 Oct 2013 12:14:55 UTC +00:00]]
+  [1m[36m (0.1ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "rooms" ("hotel_id") VALUES (?)[0m  [["hotel_id", 2]]
+  [1m[35mRoom::Translation Load (0.1ms)[0m  SELECT "room_translations".* FROM "room_translations" WHERE "room_translations"."room_id" = 3 AND "room_translations"."locale" = 'ar' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "room_translations" ("created_at", "locale", "room_id", "title", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["created_at", Sat, 26 Oct 2013 12:14:55 UTC +00:00], ["locale", "ar"], ["room_id", 3], ["title", "room title ar 1"], ["updated_at", Sat, 26 Oct 2013 12:14:55 UTC +00:00]]
+  [1m[35m (0.1ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "rooms" ("hotel_id") VALUES (?)  [["hotel_id", 2]]
+  [1m[36mRoom::Translation Load (0.1ms)[0m  [1mSELECT "room_translations".* FROM "room_translations" WHERE "room_translations"."room_id" = 4 AND "room_translations"."locale" = 'ar' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "room_translations" ("created_at", "locale", "room_id", "title", "updated_at") VALUES (?, ?, ?, ?, ?)  [["created_at", Sat, 26 Oct 2013 12:14:55 UTC +00:00], ["locale", "ar"], ["room_id", 4], ["title", "room title ar 2"], ["updated_at", Sat, 26 Oct 2013 12:14:55 UTC +00:00]]
+  [1m[36m (0.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "room_translations" ("created_at", "locale", "room_id", "title", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["created_at", Sat, 26 Oct 2013 12:14:55 UTC +00:00], ["locale", "en"], ["room_id", 3], ["title", "room title en 1"], ["updated_at", Sat, 26 Oct 2013 12:14:55 UTC +00:00]]
+  [1m[35m (0.0ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "room_translations" ("created_at", "locale", "room_id", "title", "updated_at") VALUES (?, ?, ?, ?, ?)  [["created_at", Sat, 26 Oct 2013 12:14:55 UTC +00:00], ["locale", "en"], ["room_id", 4], ["title", "room title en 2"], ["updated_at", Sat, 26 Oct 2013 12:14:55 UTC +00:00]]
+  [1m[36m (0.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mUPDATE "hotel_translations" SET "name" = 'new name', "updated_at" = '2013-10-26 12:14:55.965594' WHERE "hotel_translations"."id" = 3[0m
+  [1m[35m (0.0ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.0ms)[0m  DELETE FROM "hotel_translations" WHERE "hotel_translations"."id" = ?  [["id", 3]]
+  [1m[36mSQL (0.0ms)[0m  [1mDELETE FROM "hotel_translations" WHERE "hotel_translations"."id" = ?[0m  [["id", 4]]
+  [1m[35mRoom Load (0.1ms)[0m  SELECT "rooms".* FROM "rooms" WHERE "rooms"."hotel_id" = 2
+  [1m[36mRoom::Translation Load (0.1ms)[0m  [1mSELECT "room_translations".* FROM "room_translations" WHERE "room_translations"."room_id" = 3[0m
+  [1m[35mRoom::Translation Load (0.1ms)[0m  SELECT "room_translations".* FROM "room_translations" WHERE "room_translations"."room_id" = 4
+  [1m[36mSQL (0.0ms)[0m  [1mDELETE FROM "room_translations" WHERE "room_translations"."id" = ?[0m  [["id", 5]]
+  [1m[35mSQL (0.0ms)[0m  DELETE FROM "room_translations" WHERE "room_translations"."id" = ?  [["id", 7]]
+  [1m[36mSQL (0.0ms)[0m  [1mDELETE FROM "rooms" WHERE "rooms"."id" = ?[0m  [["id", 3]]
+  [1m[35mSQL (0.0ms)[0m  DELETE FROM "room_translations" WHERE "room_translations"."id" = ?  [["id", 6]]
+  [1m[36mSQL (0.0ms)[0m  [1mDELETE FROM "room_translations" WHERE "room_translations"."id" = ?[0m  [["id", 8]]
+  [1m[35mSQL (0.0ms)[0m  DELETE FROM "rooms" WHERE "rooms"."id" = ?  [["id", 4]]
+  [1m[36mSQL (0.0ms)[0m  [1mDELETE FROM "hotels" WHERE "hotels"."id" = ?[0m  [["id", 2]]
+  [1m[35m (0.0ms)[0m  commit transaction
