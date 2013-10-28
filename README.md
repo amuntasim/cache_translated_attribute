@@ -1,4 +1,5 @@
-# CacheTranslatedAttribute
+#Still under testing..
+## CacheTranslatedAttribute
 
 Cache translated attributes (facilitated by globalize3 gem) to reduce db call
 
