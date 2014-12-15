@@ -25,7 +25,7 @@ module CacheTranslatedAttribute
       options.symbolize_keys!
 
       attributes.each do |cacheable|
-        define_method cacheable do
+        define_method "_#{cacheable}" do
           Rails.cache.fetch(translated_cache_key(cacheable)) do
             self.read_attribute cacheable, locale: I18n.locale
           end
