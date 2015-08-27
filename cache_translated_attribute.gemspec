@@ -8,14 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = CacheTranslatedAttribute::VERSION
   spec.authors       = ["Muntasim"]
   spec.email         = ["ahmed2tul@gmail.com"]
-<<<<<<< HEAD
-  spec.description   = %q{Cache translated attributes (facilitated by globalize3 gem) to reduce db call
-}
-  spec.summary       = %q{tested with redis as cache storage, support of other storage in the pipeline}
-=======
   spec.description   = %q{Cache translated attributes (facilitated by globalize3 gem) to reduce db call}
-  spec.summary       = %q{Cache translated attributes (facilitated by globalize3 gem) to reduce db call}
->>>>>>> 701dcc417a1310daf148655e81fd294825225a4d
+  spec.summary       = %q{tested with redis as cache storage, support of other storage in the pipeline}
   spec.homepage      = ""
   spec.license       = "MIT"
 
