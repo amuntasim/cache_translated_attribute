@@ -26,7 +26,11 @@ module CacheTranslatedAttribute
       prefix = options.delete(:prefix) || '_'
 
       attributes.each do |cacheable|
+<<<<<<< HEAD
         define_method "#{prefix}#{cacheable}" do
+=======
+        define_method "_#{cacheable}" do
+>>>>>>> 701dcc417a1310daf148655e81fd294825225a4d
           Rails.cache.fetch(translated_cache_key(cacheable)) do
             self.read_attribute cacheable, locale: I18n.locale
           end
