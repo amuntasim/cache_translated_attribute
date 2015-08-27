@@ -23,9 +23,10 @@ module CacheTranslatedAttribute
       options = attributes.extract_options!
       attributes = attributes.collect(&:to_sym)
       options.symbolize_keys!
+      prefix = options.delete(:prefix) || '_'
 
       attributes.each do |cacheable|
-        define_method cacheable do
+        define_method "#{prefix}#{cacheable}" do
           Rails.cache.fetch(translated_cache_key(cacheable)) do
             self.read_attribute cacheable, locale: I18n.locale
           end
@@ -39,7 +40,7 @@ module CacheTranslatedAttribute
         end
       end
 
-      before_destroy do
+      after_destroy do
         Rails.cache.delete_matched translated_all_cache_key
       end
     end
